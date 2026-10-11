@@ -1,0 +1,16 @@
+[Unit]
+Description=Claude Code Router
+After=network.target litellm.service
+Wants=litellm.service
+
+[Service]
+Type=forking
+Environment=PATH=%h/.nvm/versions/node/v24.21.0/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=%h/.nvm/versions/node/v24.21.0/bin/ccr start
+ExecStop=%h/.nvm/versions/node/v24.21.0/bin/ccr stop
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=30
+
+[Install]
+WantedBy=default.target

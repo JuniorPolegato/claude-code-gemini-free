@@ -1,0 +1,13 @@
+[Unit]
+Description=LiteLLM Proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=%h/.config/litellm/env
+ExecStart=%h/.local/bin/litellm --config %h/.config/litellm/litellm.yaml --port 4000
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
